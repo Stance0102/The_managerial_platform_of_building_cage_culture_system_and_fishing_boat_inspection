@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}新增魚隻餵養紀錄{% endblock title %}
+
+{% block content %}
+
+<div class="card card-login mx-auto my-5">
+  <div class="card-header">新增魚隻餵養紀錄</div>
+  <div class="card-body">
+    {% from '_formhelper.html' import render_field %}
+    <form action="/cagefish_create" method="post">
+      {% if error %}
+        <div class="alert alert-danger">
+          {{ error }}
+        </div>
+      {% endif %}
+      
+      {{ form.csrf_token }}
+
+      <div class="form-group col">
+        {{ render_field(form.CageClass,class="form-control",placeholder="箱網類別") }}
+      </div>
+      <div class="form-group col">
+        {{ render_field(form.FishClass,class="form-control",placeholder="魚種") }}
+      </div>
+      <div class="form-group col">
+        {{ render_field(form.Amount,class="form-control",placeholder="數量") }}
+      </div>
+      <div class="form-group col">
+        <input class="btn btn-primary btn-block" type="submit" value="送出">
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

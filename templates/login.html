@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>箱網養殖與船隻巡檢平台</title>
+  <!-- Custom fonts for this template-->
+  <link href="{{ url_for('static',filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="{{ url_for('static',filename='vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="{{ url_for('static',filename='css/sb-admin.css') }}" rel="stylesheet">
+</head>
+<!--<style type="text/css">
+  #index {
+    background-image: url('static/images/Index.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+</style>-->
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <img src="{{ url_for('static',filename='images/Index.png') }}" alt="" class="img-fluid">
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row" id='index'>
+      <div class="col">
+        <div class="card card-login mx-auto my-2">
+          <div class="card-header">登入</div>
+          <div class="card-body">
+            {% from '_formhelper.html' import render_field %}
+            <form action="/" method="post">
+              {% if error %}
+                <div class="alert alert-danger">
+                  {{ error }}
+                </div>
+              {% endif %}
+
+              {{ form.csrf_token }}
+
+              <div class="form-group col">
+                {{ render_field(form.Email,class="form-control",placeholder="輸入Email") }}
+              </div>
+              <div class="form-group col">
+                {{ render_field(form.Password,class="form-control",placeholder="輸入密碼") }}
+              </div>
+              <div class="form-group col">
+                <input class="btn btn-primary btn-block" type="submit" value="登入">
+              </div>
+            </form>
+            <div class="text-center">
+              <a class="d-block small mt-3" href="{{ url_for('signin') }}">註冊</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container marketing text-center my-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <img class="rounded-circle" src="{{ url_for('static',filename='images/1.jpg') }}" width="140" height="140">
+        <h2 class="font-weight-bold">箱網養殖</h2>
+        <p>
+          你可以在這個平台新增箱網建置的資料，然後在後續的各類操作上更新數據，監控箱網養殖的各式數據。
+        </p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="rounded-circle" src="{{ url_for('static',filename='images/2.JPG') }}" width="140" height="140">
+        <h2 class="font-weight-bold">船隻巡檢</h2>
+        <p>
+          你可以在這個平台新增船隻巡檢的紀錄，並即時更新它，讓你智慧化管理船隻巡檢的狀況。
+        </p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="rounded-circle" src="{{ url_for('static',filename='images/3.jpg') }}" width="140" height="140">
+        <h2 class="font-weight-bold">魚隻餵養</h2>
+        <p>
+          你可以在這裡連動前面的箱網資料及巡檢資料近一步的即時了解魚隻餵養的狀態，只需要極少量的步驟。
+        </p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

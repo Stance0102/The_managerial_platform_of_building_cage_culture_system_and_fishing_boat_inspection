@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}註冊{% endblock title %}
+
+{% block content %}
+
+<div class="card card-register mx-auto my-5">
+  <div class="card-header">註冊一個帳戶</div>
+  <div class="card-body">
+    {% from "_formhelper.html" import render_field %}
+    <form action="/signin" method="post">
+      
+      {% if error %}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+      {% endif %}
+
+      {{ form.csrf_token }}
+
+    <div class="form-row">
+      <div class="form-group col">
+        {{ render_field(form.UserName,class="form-control",placeholder="輸入帳號") }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        {{ render_field(form.Email,class="form-control",placeholder="輸入Email") }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        {{ render_field(form.Password,class="form-control",placeholder="輸入密碼") }}
+      </div>
+      <div class="form-group col">
+        {{ render_field(form.Confirm,class="form-control",placeholder="再次輸入帳號") }}
+      </div>
+    </div>
+    <input class="btn btn-primary btn-block" type="submit" value="註冊">
+  </form>
+    <div class="text-center">
+      <a class="d-block small mt-3" href="{{ url_for('login') }}">登入</a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

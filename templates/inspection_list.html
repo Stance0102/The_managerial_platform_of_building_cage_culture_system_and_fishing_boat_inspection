@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}巡檢紀錄清單{% endblock title %}
+{% block content %}
+<!-- DataTables Example -->
+<div class="card mb-3">
+  <div class="card-header">
+      <i class="fas fa-table"></i>
+      巡檢紀錄清單
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>箱網編號</th>
+            <th>船隻編號</th>
+            <th>巡檢開始時間</th>
+            <th>巡檢結束時間</th>
+            <th>使用者</th>
+            <th>魚隻狀態</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in inspectionlist %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item['CageClass'] }}</td>
+            <td>{{ item['Boat'] }}</td>
+            <td>
+              {{ item['StartTime'] | datetime }}
+            </td>
+            <td>
+              {% if item['EndTime'] != None %}
+                {{ item['EndTime'] | datetime }} <br>
+              {% endif %}
+              <a class="btn btn-success ml-2" href="/inspection_update_time?id={{ item['Id'] }}">
+                更新
+              </a>
+            </td>
+            <td>{{ item['UserId'] | viewusername }}</td>
+            <td>
+              {{ item['FishStatus'] | trueorfalse }} <br>
+              <div class="btn-group">
+                <a class="btn btn-success" href="/inspection_update_time?id={{ item['Id'] }}&boolean=1">
+                  良好
+                </a>
+                <a class="btn btn-danger" href="/inspection_update_time?id={{ item['Id'] }}&boolean=0">
+                  欠佳
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

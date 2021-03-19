@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Error 404{% endblock title %}
+
+{% block content %}
+<h1 class="display-1">Error 404</h1>
+<p class="lead">哎呀!網站錯誤囉!你可以
+  <a href="javascript:history.back()">回上一頁</a>
+  重新操作，或
+  <a href="{{ url_for('index') }}">回首頁</a>
+</p>
+{% endblock content %}

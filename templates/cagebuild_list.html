@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}箱網建置清單{% endblock title %}
+{% block content %}
+<!-- DataTables Example -->
+<div class="card mb-3">
+  <div class="card-header">
+      <i class="fas fa-table"></i>
+      箱網建置清單
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>箱網類別</th>
+            <th>箱網建置時間</th>
+            <th>上次維護時間</th>
+            <th>箱網經度</th>
+            <th>箱網緯度</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in buildlist %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item['CageClass'] }}</td>
+            <td>
+              {{ item['BuildDate'] | datetime }}
+            </td>
+            <td>
+              {{ item['FixDate'] | datetime }}
+              <a class="btn btn-success ml-2" href="/cage_update_time?id={{ item['Id'] }}">
+                更新
+              </a>
+            </td>
+            <td>{{ item['Lat'] }}</td>
+            <td>{{ item['Lng'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
